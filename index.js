@@ -14,7 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/', routing);
-
+app.get('/', (req, res) => {
+  res.send('Hello')
+})
 app.listen(port, () => {
   console.log(`running ${port}`);
 });
