@@ -17,8 +17,9 @@ class NotesController {
 	}
 
 	async getNotes(req, res) {
+		let doc
 		try{
-			const doc = await Note.find({});
+			doc = await Note.find({});
 		}
 		catch(err){
 			return res.status(404).json({message: err.message}) 
