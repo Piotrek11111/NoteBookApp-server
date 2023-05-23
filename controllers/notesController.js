@@ -2,14 +2,16 @@ const Note = require("../db/models/note.js");
 
 class NotesController {
 	async saveNote(req, res) {
+		const { title, body } = req.body;
 
-		const {title, body} = req.body
-   
-		const note = new Note({
-			title: title, body: body
-		});
-		await note.save();
-    
+		let note;
+
+		try {
+			note = new Note({ title, body });
+			await note.save();
+		} catch (err) {
+			return res.status(422).json({ message: err.message });
+		}
 
 		res.status(201).json(note);
 	}
